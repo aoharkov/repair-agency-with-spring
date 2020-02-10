@@ -23,7 +23,6 @@ import aoharkov.training.repairagency.repository.RepairStageRepository;
 import aoharkov.training.repairagency.repository.RequestRepository;
 import aoharkov.training.repairagency.repository.UserRepository;
 import aoharkov.training.repairagency.repository.domain.Page;
-import aoharkov.training.repairagency.service.validator.UserValidatorImpl;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -88,8 +87,6 @@ public class ClientServiceImplTest {
             .build();
 
     @Mock
-    private UserValidatorImpl userValidator;
-    @Mock
     private BCryptPasswordEncoder passwordEncoder;
     @Mock
     private UserRepository userRepository;
@@ -121,8 +118,7 @@ public class ClientServiceImplTest {
 
     @After
     public void resetMocks() {
-        Mockito.reset(userValidator, passwordEncoder, userRepository, userMapper,
-                requestRepository, refusalRepository, orderRepository, repairStageRepository, feedbackRepository,
+        Mockito.reset(requestRepository, refusalRepository, orderRepository, repairStageRepository, feedbackRepository,
                 requestMapper, refusalMapper, orderMapper, repairStageMapper, feedbackMapper);
     }
 
@@ -135,10 +131,6 @@ public class ClientServiceImplTest {
 
         verify(requestMapper).mapDomainToEntity(eq(REQUEST));
         verify(requestRepository).save(eq(REQUEST_ENTITY));
-        verifyZeroInteractions(userValidator);
-        verifyZeroInteractions(passwordEncoder);
-        verifyZeroInteractions(userRepository);
-        verifyZeroInteractions(userMapper);
         //verifyZeroInteractions(requestDao);
         verifyZeroInteractions(refusalRepository);
         verifyZeroInteractions(orderRepository);
@@ -160,7 +152,6 @@ public class ClientServiceImplTest {
 
         verify(requestRepository).findAllByClientId(anyInt(), anyInt(), anyInt());
         verify(requestMapper, times(2)).mapEntityToDomain(eq(REQUEST_ENTITY));
-        verifyZeroInteractions(userValidator);
         verifyZeroInteractions(passwordEncoder);
         verifyZeroInteractions(userRepository);
         verifyZeroInteractions(userMapper);
