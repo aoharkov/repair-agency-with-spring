@@ -23,7 +23,6 @@ import aoharkov.training.repairagency.repository.RepairStageRepository;
 import aoharkov.training.repairagency.repository.RequestRepository;
 import aoharkov.training.repairagency.repository.UserRepository;
 import aoharkov.training.repairagency.repository.domain.Page;
-import aoharkov.training.repairagency.service.encoder.Encoder;
 import aoharkov.training.repairagency.service.validator.UserValidatorImpl;
 import org.junit.After;
 import org.junit.Test;
@@ -32,6 +31,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -90,7 +90,7 @@ public class ClientServiceImplTest {
     @Mock
     private UserValidatorImpl userValidator;
     @Mock
-    private Encoder passwordEncoder;
+    private BCryptPasswordEncoder passwordEncoder;
     @Mock
     private UserRepository userRepository;
     @Mock
