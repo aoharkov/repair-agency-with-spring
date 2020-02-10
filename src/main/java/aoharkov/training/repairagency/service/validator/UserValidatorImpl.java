@@ -3,10 +3,12 @@ package aoharkov.training.repairagency.service.validator;
 import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.service.exception.validation.InvalidEmailException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidPasswordException;
+import org.springframework.stereotype.Component;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Component
 public class UserValidatorImpl implements Validator<User> {
     private static final String EMAIL_REGEX
             = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";

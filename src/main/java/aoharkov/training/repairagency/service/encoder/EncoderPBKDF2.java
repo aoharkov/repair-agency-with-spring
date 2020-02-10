@@ -2,6 +2,7 @@ package aoharkov.training.repairagency.service.encoder;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -10,6 +11,7 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 
+@Component
 public class EncoderPBKDF2 implements Encoder {
     private static final Logger LOGGER = LogManager.getLogger(EncoderPBKDF2.class);
 
