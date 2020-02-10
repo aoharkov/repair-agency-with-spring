@@ -7,7 +7,6 @@ import aoharkov.training.repairagency.domain.RepairStage;
 import aoharkov.training.repairagency.domain.Request;
 import org.springframework.stereotype.Service;
 
-@Service
 public interface ClientService extends UserService {
 
     void saveRequest(Request request);
