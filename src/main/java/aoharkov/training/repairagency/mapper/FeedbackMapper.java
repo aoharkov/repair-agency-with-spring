@@ -4,6 +4,7 @@ import aoharkov.training.repairagency.domain.Feedback;
 import aoharkov.training.repairagency.domain.Request;
 import aoharkov.training.repairagency.entity.FeedbackEntity;
 
+
 public class FeedbackMapper implements Mapper<FeedbackEntity, Feedback> {
 
     @Override
