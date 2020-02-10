@@ -7,23 +7,23 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
+@Entity
 @Data
 @Builder
 @AllArgsConstructor
-
-@Entity
 @Table(name = "requests")
 public class RequestEntity {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private final Integer id;
 
-    @Column(name = "client_id")
+    @JoinColumn(name = "client_id", referencedColumnName = "id", nullable = false)
     private final Integer clientId;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private final String description;
 
     @Column(name = "viewed")

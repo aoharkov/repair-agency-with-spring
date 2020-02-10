@@ -12,30 +12,29 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Entity
 @Data
 @Builder
 @AllArgsConstructor
-
-@Entity
 @Table(name = "users")
 public class UserEntity {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private final Integer id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private final String name;
 
     @Column(name = "surname")
     private final String surname;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private final String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private final String password;
 
-    @Column(name = "role")
+    @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private final Role role;
 }

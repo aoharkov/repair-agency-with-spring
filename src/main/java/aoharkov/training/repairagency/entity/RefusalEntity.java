@@ -7,25 +7,25 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
+@Entity
 @Data
 @Builder
 @AllArgsConstructor
-
-@Entity
 @Table(name = "refusals")
 public class RefusalEntity {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private final Integer id;
 
-    @Column(name = "request_id")
+    @JoinColumn(name = "request_id", referencedColumnName = "id", nullable = false)
     private final Integer requestId;
 
-    @Column(name = "explanation")
+    @Column(name = "explanation", nullable = false)
     private final String explanation;
 
-    @Column(name = "manager_id")
+    @JoinColumn(name = "manager_id", referencedColumnName = "id", nullable = false)
     private final Integer managerId;
 }

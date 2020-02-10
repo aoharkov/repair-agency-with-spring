@@ -9,17 +9,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Entity
 @Data
 @Builder
 @AllArgsConstructor
-
-@Entity
 @Table(name = "repair_stages")
 public class RepairStageEntity {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private final Integer id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private final String name;
 }
