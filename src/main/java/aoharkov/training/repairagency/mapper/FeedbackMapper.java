@@ -3,8 +3,9 @@ package aoharkov.training.repairagency.mapper;
 import aoharkov.training.repairagency.domain.Feedback;
 import aoharkov.training.repairagency.domain.Request;
 import aoharkov.training.repairagency.entity.FeedbackEntity;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class FeedbackMapper implements Mapper<FeedbackEntity, Feedback> {
 
     @Override

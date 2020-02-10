@@ -3,7 +3,9 @@ package aoharkov.training.repairagency.mapper;
 import aoharkov.training.repairagency.domain.Request;
 import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.RequestEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RequestMapper implements Mapper<RequestEntity, Request> {
 
     @Override

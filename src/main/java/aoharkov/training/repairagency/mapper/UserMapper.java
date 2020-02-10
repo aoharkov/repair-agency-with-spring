@@ -2,7 +2,9 @@ package aoharkov.training.repairagency.mapper;
 
 import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.UserEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserMapper implements Mapper<UserEntity, User> {
 
     @Override

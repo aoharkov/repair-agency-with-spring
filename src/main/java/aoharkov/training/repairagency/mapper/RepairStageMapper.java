@@ -2,7 +2,9 @@ package aoharkov.training.repairagency.mapper;
 
 import aoharkov.training.repairagency.domain.RepairStage;
 import aoharkov.training.repairagency.entity.RepairStageEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RepairStageMapper implements Mapper<RepairStageEntity, RepairStage> {
 
     @Override

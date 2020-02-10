@@ -5,7 +5,9 @@ import aoharkov.training.repairagency.domain.RepairStage;
 import aoharkov.training.repairagency.domain.Request;
 import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.OrderEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderMapper implements Mapper<OrderEntity, Order> {
 
     @Override
