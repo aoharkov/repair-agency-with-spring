@@ -2,7 +2,9 @@ package aoharkov.training.repairagency.service;
 
 import aoharkov.training.repairagency.domain.Role;
 import aoharkov.training.repairagency.domain.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface AdminService {
 
 //    List<User> findAllUsers(int page, int itemsPerPage);
