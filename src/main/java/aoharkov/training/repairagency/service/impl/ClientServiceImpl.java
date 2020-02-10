@@ -5,7 +5,6 @@ import aoharkov.training.repairagency.domain.Order;
 import aoharkov.training.repairagency.domain.Refusal;
 import aoharkov.training.repairagency.domain.RepairStage;
 import aoharkov.training.repairagency.domain.Request;
-import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.OrderEntity;
 import aoharkov.training.repairagency.entity.RefusalEntity;
 import aoharkov.training.repairagency.entity.RepairStageEntity;
@@ -14,21 +13,22 @@ import aoharkov.training.repairagency.mapper.OrderMapper;
 import aoharkov.training.repairagency.mapper.RefusalMapper;
 import aoharkov.training.repairagency.mapper.RepairStageMapper;
 import aoharkov.training.repairagency.mapper.RequestMapper;
-import aoharkov.training.repairagency.mapper.UserMapper;
 import aoharkov.training.repairagency.repository.FeedbackRepository;
 import aoharkov.training.repairagency.repository.OrderRepository;
 import aoharkov.training.repairagency.repository.RefusalRepository;
 import aoharkov.training.repairagency.repository.RepairStageRepository;
 import aoharkov.training.repairagency.repository.RequestRepository;
-import aoharkov.training.repairagency.repository.UserRepository;
 import aoharkov.training.repairagency.service.ClientService;
-import aoharkov.training.repairagency.service.encoder.Encoder;
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
-import aoharkov.training.repairagency.service.validator.Validator;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-public class ClientServiceImpl extends UserServiceImpl implements ClientService {
+@Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
+public class ClientServiceImpl implements ClientService {
     private final RequestRepository requestRepository;
     private final RefusalRepository refusalRepository;
     private final OrderRepository orderRepository;
@@ -40,23 +40,6 @@ public class ClientServiceImpl extends UserServiceImpl implements ClientService 
     private final RepairStageMapper repairStageMapper;
     private final FeedbackMapper feedbackMapper;
 
-    public ClientServiceImpl(Encoder encoder, Validator<User> userValidator,
-                             UserRepository userRepository, RequestRepository requestRepository, RefusalRepository refusalRepository,
-                             OrderRepository orderRepository, RepairStageRepository repairStageRepository, FeedbackRepository feedbackRepository,
-                             UserMapper userMapper, RequestMapper requestMapper, RefusalMapper refusalMapper,
-                             OrderMapper orderMapper, RepairStageMapper repairStageMapper, FeedbackMapper feedbackMapper) {
-        super(encoder, userValidator, userRepository, userMapper);
-        this.requestRepository = requestRepository;
-        this.refusalRepository = refusalRepository;
-        this.orderRepository = orderRepository;
-        this.repairStageRepository = repairStageRepository;
-        this.feedbackRepository = feedbackRepository;
-        this.requestMapper = requestMapper;
-        this.refusalMapper = refusalMapper;
-        this.orderMapper = orderMapper;
-        this.repairStageMapper = repairStageMapper;
-        this.feedbackMapper = feedbackMapper;
-    }
 
     @Override
     public void saveRequest(Request request) {

@@ -3,9 +3,8 @@ package aoharkov.training.repairagency.service;
 import aoharkov.training.repairagency.domain.Order;
 import aoharkov.training.repairagency.domain.RepairStage;
 import aoharkov.training.repairagency.domain.Request;
-import org.springframework.stereotype.Service;
 
-public interface MasterService extends UserService {
+public interface MasterService {
 
     //List<Order> findAllOrders(int page, int itemsPerPage);
 

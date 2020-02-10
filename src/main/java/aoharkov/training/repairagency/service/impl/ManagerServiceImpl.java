@@ -3,25 +3,25 @@ package aoharkov.training.repairagency.service.impl;
 import aoharkov.training.repairagency.domain.Order;
 import aoharkov.training.repairagency.domain.Refusal;
 import aoharkov.training.repairagency.domain.Request;
-import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.RequestEntity;
 import aoharkov.training.repairagency.mapper.FeedbackMapper;
 import aoharkov.training.repairagency.mapper.OrderMapper;
 import aoharkov.training.repairagency.mapper.RefusalMapper;
 import aoharkov.training.repairagency.mapper.RequestMapper;
-import aoharkov.training.repairagency.mapper.UserMapper;
 import aoharkov.training.repairagency.repository.FeedbackRepository;
 import aoharkov.training.repairagency.repository.OrderRepository;
 import aoharkov.training.repairagency.repository.RefusalRepository;
 import aoharkov.training.repairagency.repository.RequestRepository;
-import aoharkov.training.repairagency.repository.UserRepository;
 import aoharkov.training.repairagency.service.ManagerService;
-import aoharkov.training.repairagency.service.encoder.Encoder;
-import aoharkov.training.repairagency.service.validator.Validator;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-public class ManagerServiceImpl extends UserServiceImpl implements ManagerService {
+@Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
+public class ManagerServiceImpl implements ManagerService {
     private final RequestRepository requestRepository;
     private final RefusalRepository refusalRepository;
     private final OrderRepository orderRepository;
@@ -30,22 +30,6 @@ public class ManagerServiceImpl extends UserServiceImpl implements ManagerServic
     private final RefusalMapper refusalMapper;
     private final OrderMapper orderMapper;
     private final FeedbackMapper feedbackMapper;
-
-    public ManagerServiceImpl(Encoder encoder, Validator<User> userValidator,
-                              UserRepository userRepository, RequestRepository requestRepository, RefusalRepository refusalRepository,
-                              OrderRepository orderRepository, FeedbackRepository feedbackRepository,
-                              UserMapper userMapper, RequestMapper requestMapper, RefusalMapper refusalMapper,
-                              OrderMapper orderMapper, FeedbackMapper feedbackMapper) {
-        super(encoder, userValidator, userRepository, userMapper);
-        this.requestRepository = requestRepository;
-        this.refusalRepository = refusalRepository;
-        this.orderRepository = orderRepository;
-        this.feedbackRepository = feedbackRepository;
-        this.requestMapper = requestMapper;
-        this.refusalMapper = refusalMapper;
-        this.orderMapper = orderMapper;
-        this.feedbackMapper = feedbackMapper;
-    }
 
     /*@Override
     public List<Request> findAllRequests(int page, int itemsPerPage) {

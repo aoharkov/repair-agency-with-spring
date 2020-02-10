@@ -6,17 +6,17 @@ import aoharkov.training.repairagency.entity.UserEntity;
 import aoharkov.training.repairagency.mapper.UserMapper;
 import aoharkov.training.repairagency.repository.UserRepository;
 import aoharkov.training.repairagency.service.AdminService;
-import aoharkov.training.repairagency.service.encoder.Encoder;
-import aoharkov.training.repairagency.service.validator.Validator;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-public class AdminServiceImpl extends UserServiceImpl implements AdminService {
-
-    public AdminServiceImpl(Encoder encoder, Validator<User> userValidator,
-                            UserRepository userRepository, UserMapper userMapper) {
-        super(encoder, userValidator, userRepository, userMapper);
-    }
+@Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
+public class AdminServiceImpl implements AdminService {
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
 /*    @Override
     public List<User> findAllUsers(int page, int itemsPerPage) {

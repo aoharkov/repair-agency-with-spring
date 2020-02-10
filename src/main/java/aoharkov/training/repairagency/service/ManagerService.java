@@ -2,9 +2,8 @@ package aoharkov.training.repairagency.service;
 
 import aoharkov.training.repairagency.domain.Order;
 import aoharkov.training.repairagency.domain.Refusal;
-import org.springframework.stereotype.Service;
 
-public interface ManagerService extends UserService {
+public interface ManagerService {
 
     //List<Request> findAllRequests(int page, int itemsPerPage);
 
