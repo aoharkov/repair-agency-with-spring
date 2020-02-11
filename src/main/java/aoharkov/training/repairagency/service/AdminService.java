@@ -8,5 +8,5 @@ public interface AdminService {
 
     Page<User> findAllUsers(int page, int itemsPerPage);
 
-    void setRoleToUser(User user, Role role);
+    void setRoleToUser(Integer userId, Role role);
 }

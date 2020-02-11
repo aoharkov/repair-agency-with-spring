@@ -11,7 +11,7 @@ public interface MasterService {
 
     Request getRequest(Integer orderId);
 
-    boolean updateRepairStage(Order order, RepairStage newRepairStage);
+    boolean updateRepairStage(Integer orderId, RepairStage newRepairStage);
 
     Page<RepairStage> findAllRepairStages(int page, int itemsPerPage);
 }

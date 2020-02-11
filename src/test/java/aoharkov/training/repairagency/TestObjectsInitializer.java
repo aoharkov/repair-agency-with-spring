@@ -13,10 +13,6 @@ import aoharkov.training.repairagency.entity.RefusalEntity;
 import aoharkov.training.repairagency.entity.RepairStageEntity;
 import aoharkov.training.repairagency.entity.RequestEntity;
 import aoharkov.training.repairagency.entity.UserEntity;
-import org.springframework.data.domain.Page;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 public class TestObjectsInitializer {
     public static UserEntity initUserEntity() {
