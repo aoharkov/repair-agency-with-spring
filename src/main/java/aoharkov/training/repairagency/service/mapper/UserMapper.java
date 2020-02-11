@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
 public class UserMapper implements Mapper<UserEntity, User> {
 
     @Override
-    public UserEntity mapDomainToEntity(User item) {
+    public UserEntity mapDomainToEntity(User user) {
         return new UserEntity(
-                item.getId(),
-                item.getName(),
-                item.getSurname(),
-                item.getEmail(),
-                item.getPassword(),
-                item.getRole());
+                user.getId(),
+                user.getName(),
+                user.getSurname(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getRole());
     }
 
     @Override

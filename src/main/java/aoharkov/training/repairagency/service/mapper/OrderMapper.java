@@ -11,14 +11,14 @@ import org.springframework.stereotype.Component;
 public class OrderMapper implements Mapper<OrderEntity, Order> {
 
     @Override
-    public OrderEntity mapDomainToEntity(Order item) {
+    public OrderEntity mapDomainToEntity(Order order) {
         return new OrderEntity(
-                item.getId(),
-                item.getRequest().getId(),
-                item.getManager().getId(),
-                item.getPrice(),
-                item.getMaster().getId(),
-                item.getRepairStage().getId());
+                order.getId(),
+                order.getRequest().getId(),
+                order.getManager().getId(),
+                order.getPrice(),
+                order.getMaster().getId(),
+                order.getRepairStage().getId());
     }
 
     @Override

@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 public class RepairStageMapper implements Mapper<RepairStageEntity, RepairStage> {
 
     @Override
-    public RepairStageEntity mapDomainToEntity(RepairStage item) {
+    public RepairStageEntity mapDomainToEntity(RepairStage repairStage) {
         return new RepairStageEntity(
-                item.getId(),
-                item.getName());
+                repairStage.getId(),
+                repairStage.getName());
     }
 
     @Override

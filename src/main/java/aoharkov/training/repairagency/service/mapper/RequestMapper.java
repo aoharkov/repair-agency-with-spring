@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 public class RequestMapper implements Mapper<RequestEntity, Request> {
 
     @Override
-    public RequestEntity mapDomainToEntity(Request item) {
+    public RequestEntity mapDomainToEntity(Request request) {
         return new RequestEntity(
-                item.getId(),
-                item.getClient().getId(),
-                item.getDescription(),
-                item.getViewed(),
-                item.getAccepted());
+                request.getId(),
+                request.getClient().getId(),
+                request.getDescription(),
+                request.getViewed(),
+                request.getAccepted());
     }
 
     @Override

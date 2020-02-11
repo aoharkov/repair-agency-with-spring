@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 public class FeedbackMapper implements Mapper<FeedbackEntity, Feedback> {
 
     @Override
-    public FeedbackEntity mapDomainToEntity(Feedback item) {
+    public FeedbackEntity mapDomainToEntity(Feedback feedback) {
         return new FeedbackEntity(
-                item.getId(),
-                item.getRequest().getId(),
-                item.getText(),
-                item.getScore());
+                feedback.getId(),
+                feedback.getRequest().getId(),
+                feedback.getText(),
+                feedback.getScore());
     }
 
     @Override

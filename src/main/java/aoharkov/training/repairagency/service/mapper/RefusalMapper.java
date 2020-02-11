@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 public class RefusalMapper implements Mapper<RefusalEntity, Refusal> {
 
     @Override
-    public RefusalEntity mapDomainToEntity(Refusal item) {
+    public RefusalEntity mapDomainToEntity(Refusal refusal) {
         return new RefusalEntity(
-                item.getId(),
-                item.getRequest().getId(),
-                item.getExplanation(),
-                item.getManager().getId());
+                refusal.getId(),
+                refusal.getRequest().getId(),
+                refusal.getExplanation(),
+                refusal.getManager().getId());
     }
 
     @Override
