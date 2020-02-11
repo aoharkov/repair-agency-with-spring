@@ -1,5 +1,6 @@
 package aoharkov.training.repairagency.mapper;
 
+import aoharkov.training.repairagency.TestObjectsInitializer;
 import aoharkov.training.repairagency.domain.Order;
 import aoharkov.training.repairagency.domain.RepairStage;
 import aoharkov.training.repairagency.domain.Request;
@@ -17,23 +18,8 @@ public class OrderMapperTest {
 
     @Before
     public void setUp() {
-        entity = OrderEntity.builder()
-                .id(1)
-                .managerId(2)
-                .masterId(3)
-                .price(4000)
-                .repairStageId(5)
-                .requestId(6)
-                .build();
-
-        item = Order.builder()
-                .id(1)
-                .manager(User.builder().id(2).build())
-                .master(User.builder().id(3).build())
-                .price(4000)
-                .repairStage(RepairStage.builder().id(5).build())
-                .request(Request.builder().id(6).build())
-                .build();
+        entity = TestObjectsInitializer.initOrderEntity();
+        item = TestObjectsInitializer.initOrder();
     }
 
     @Test

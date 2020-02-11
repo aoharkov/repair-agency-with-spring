@@ -11,7 +11,6 @@ import javax.persistence.Table;
 
 @Entity
 @Data
-@Builder
 @AllArgsConstructor
 @Table(name = "repair_stages")
 public class RepairStageEntity {

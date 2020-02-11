@@ -10,13 +10,12 @@ public class RequestMapper implements Mapper<RequestEntity, Request> {
 
     @Override
     public RequestEntity mapDomainToEntity(Request item) {
-        return RequestEntity.builder()
-                .id(item.getId())
-                .description(item.getDescription())
-                .clientId(item.getClient().getId())
-                .viewed(item.getViewed())
-                .accepted(item.getAccepted())
-                .build();
+        return new RequestEntity(
+                item.getId(),
+                item.getClient().getId(),
+                item.getDescription(),
+                item.getViewed(),
+                item.getAccepted());
     }
 
     @Override

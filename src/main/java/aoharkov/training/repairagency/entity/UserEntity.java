@@ -14,7 +14,6 @@ import javax.persistence.Table;
 
 @Entity
 @Data
-@Builder
 @AllArgsConstructor
 @Table(name = "users")
 public class UserEntity {

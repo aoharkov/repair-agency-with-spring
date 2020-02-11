@@ -1,5 +1,6 @@
 package aoharkov.training.repairagency.service.impl;
 
+import aoharkov.training.repairagency.TestObjectsInitializer;
 import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.UserEntity;
 import aoharkov.training.repairagency.mapper.UserMapper;
@@ -40,16 +41,8 @@ public class UserServiceImplTest {
     private static final String INVALID_EMAIL = "admin#gmail.com";
     private static final String CORRECT_EMAIL_NOT_IN_DB = "admin@mail.ru";
 
-    private static final UserEntity USER_ENTITY = UserEntity.builder()
-            .id(1)
-            .password(ENCODED_PASSWORD)
-            .email(EMAIL)
-            .build();
-    private static final User USER = User.builder()
-            .id(1)
-            .password(ENCODED_PASSWORD)
-            .email(EMAIL)
-            .build();
+    private static final UserEntity USER_ENTITY = TestObjectsInitializer.initUserEntity();
+    private static final User USER = TestObjectsInitializer.initUser();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

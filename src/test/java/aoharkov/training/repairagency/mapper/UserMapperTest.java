@@ -1,6 +1,6 @@
 package aoharkov.training.repairagency.mapper;
 
-import aoharkov.training.repairagency.domain.Role;
+import aoharkov.training.repairagency.TestObjectsInitializer;
 import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.UserEntity;
 import org.junit.Before;
@@ -15,22 +15,8 @@ public class UserMapperTest {
 
     @Before
     public void setUp() {
-        entity = UserEntity.builder()
-                .id(1)
-                .name("John")
-                .surname("Doe")
-                .email("doe@gmail.com")
-                .password("pass")
-                .role(Role.CLIENT)
-                .build();
-        item = User.builder()
-                .id(1)
-                .name("John")
-                .surname("Doe")
-                .email("doe@gmail.com")
-                .password("pass")
-                .role(Role.CLIENT)
-                .build();
+        entity = TestObjectsInitializer.initUserEntity();
+        item = TestObjectsInitializer.initUser();
     }
 
     @Test

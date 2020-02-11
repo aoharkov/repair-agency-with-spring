@@ -9,14 +9,13 @@ public class UserMapper implements Mapper<UserEntity, User> {
 
     @Override
     public UserEntity mapDomainToEntity(User item) {
-        return UserEntity.builder()
-                .id(item.getId())
-                .name(item.getName())
-                .surname(item.getSurname())
-                .email(item.getEmail())
-                .password(item.getPassword())
-                .role(item.getRole())
-                .build();
+        return new UserEntity(
+                item.getId(),
+                item.getName(),
+                item.getSurname(),
+                item.getEmail(),
+                item.getPassword(),
+                item.getRole());
     }
 
     @Override

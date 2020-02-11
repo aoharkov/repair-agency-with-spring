@@ -1,5 +1,6 @@
 package aoharkov.training.repairagency.service.impl;
 
+import aoharkov.training.repairagency.TestObjectsInitializer;
 import aoharkov.training.repairagency.domain.Feedback;
 import aoharkov.training.repairagency.domain.Order;
 import aoharkov.training.repairagency.domain.Refusal;
@@ -36,42 +37,16 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClientServiceImplTest {
-    private static final RequestEntity REQUEST_ENTITY = RequestEntity.builder()
-            .id(1)
-            .build();
-    private static final Request REQUEST = Request.builder()
-            .id(1)
-            .build();
-    private static final OrderEntity ORDER_ENTITY = OrderEntity.builder()
-            .id(2)
-            .requestId(1)
-            .build();
-    private static final Order ORDER = Order.builder()
-            .id(2)
-            .request(REQUEST)
-            .build();
-    private static final RefusalEntity REFUSAL_ENTITY = RefusalEntity.builder()
-            .id(3)
-            .requestId(1)
-            .build();
-    private static final Refusal REFUSAL = Refusal.builder()
-            .id(3)
-            .request(REQUEST)
-            .build();
-    private static final FeedbackEntity FEEDBACK_ENTITY = FeedbackEntity.builder()
-            .id(4)
-            .requestId(1)
-            .build();
-    private static final Feedback FEEDBACK = Feedback.builder()
-            .id(4)
-            .request(REQUEST)
-            .build();
-    private static final RepairStageEntity REPAIR_STAGE_ENTITY = RepairStageEntity.builder()
-            .id(5)
-            .build();
-    private static final RepairStage REPAIR_STAGE = RepairStage.builder()
-            .id(5)
-            .build();
+    private static final RequestEntity REQUEST_ENTITY = TestObjectsInitializer.initRequestEntity();
+    private static final Request REQUEST = TestObjectsInitializer.initRequest();
+    private static final OrderEntity ORDER_ENTITY = TestObjectsInitializer.initOrderEntity();
+    private static final Order ORDER = TestObjectsInitializer.initOrder();
+    private static final RefusalEntity REFUSAL_ENTITY = TestObjectsInitializer.initRefusalEntity();
+    private static final Refusal REFUSAL = TestObjectsInitializer.initRefusal();
+    private static final FeedbackEntity FEEDBACK_ENTITY = TestObjectsInitializer.initFeedbackEntity();
+    private static final Feedback FEEDBACK = TestObjectsInitializer.initFeedback();
+    private static final RepairStageEntity REPAIR_STAGE_ENTITY = TestObjectsInitializer.initRepairStageEntity();
+    private static final RepairStage REPAIR_STAGE = TestObjectsInitializer.initRepairStage();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

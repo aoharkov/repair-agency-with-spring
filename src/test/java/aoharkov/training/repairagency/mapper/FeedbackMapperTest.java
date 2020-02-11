@@ -1,5 +1,6 @@
 package aoharkov.training.repairagency.mapper;
 
+import aoharkov.training.repairagency.TestObjectsInitializer;
 import aoharkov.training.repairagency.domain.Feedback;
 import aoharkov.training.repairagency.domain.Request;
 import aoharkov.training.repairagency.entity.FeedbackEntity;
@@ -15,18 +16,8 @@ public class FeedbackMapperTest {
 
     @Before
     public void setUp() {
-        entity = FeedbackEntity.builder()
-                .id(1)
-                .requestId(2)
-                .score(3)
-                .text("UFO has published here")
-                .build();
-        item = Feedback.builder()
-                .id(1)
-                .request(Request.builder().id(2).build())
-                .score(3)
-                .text("UFO has published here")
-                .build();
+        entity = TestObjectsInitializer.initFeedbackEntity();
+        item = TestObjectsInitializer.initFeedback();
     }
 
     @Test

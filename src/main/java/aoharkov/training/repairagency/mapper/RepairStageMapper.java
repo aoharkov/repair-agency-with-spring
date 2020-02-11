@@ -9,10 +9,9 @@ public class RepairStageMapper implements Mapper<RepairStageEntity, RepairStage>
 
     @Override
     public RepairStageEntity mapDomainToEntity(RepairStage item) {
-        return RepairStageEntity.builder()
-                .id(item.getId())
-                .name(item.getName())
-                .build();
+        return new RepairStageEntity(
+                item.getId(),
+                item.getName());
     }
 
     @Override

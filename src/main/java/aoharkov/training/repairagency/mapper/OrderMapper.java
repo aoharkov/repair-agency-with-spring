@@ -12,14 +12,13 @@ public class OrderMapper implements Mapper<OrderEntity, Order> {
 
     @Override
     public OrderEntity mapDomainToEntity(Order item) {
-        return OrderEntity.builder()
-                .id(item.getId())
-                .managerId(item.getManager().getId())
-                .masterId(item.getMaster().getId())
-                .price(item.getPrice())
-                .repairStageId(item.getRepairStage().getId())
-                .requestId(item.getRequest().getId())
-                .build();
+        return new OrderEntity(
+                item.getId(),
+                item.getRequest().getId(),
+                item.getManager().getId(),
+                item.getPrice(),
+                item.getMaster().getId(),
+                item.getRepairStage().getId());
     }
 
     @Override

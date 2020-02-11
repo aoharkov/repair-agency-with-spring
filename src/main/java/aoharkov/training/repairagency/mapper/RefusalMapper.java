@@ -11,12 +11,11 @@ public class RefusalMapper implements Mapper<RefusalEntity, Refusal> {
 
     @Override
     public RefusalEntity mapDomainToEntity(Refusal item) {
-        return RefusalEntity.builder()
-                .id(item.getId())
-                .explanation(item.getExplanation())
-                .managerId(item.getManager().getId())
-                .requestId(item.getRequest().getId())
-                .build();
+        return new RefusalEntity(
+                item.getId(),
+                item.getRequest().getId(),
+                item.getExplanation(),
+                item.getManager().getId());
     }
 
     @Override

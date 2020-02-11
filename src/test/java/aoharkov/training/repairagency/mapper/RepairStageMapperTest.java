@@ -1,5 +1,6 @@
 package aoharkov.training.repairagency.mapper;
 
+import aoharkov.training.repairagency.TestObjectsInitializer;
 import aoharkov.training.repairagency.domain.RepairStage;
 import aoharkov.training.repairagency.entity.RepairStageEntity;
 import org.junit.Before;
@@ -14,14 +15,8 @@ public class RepairStageMapperTest {
 
     @Before
     public void setUp() {
-        entity = RepairStageEntity.builder()
-                .id(1)
-                .name("first stage")
-                .build();
-        item = RepairStage.builder()
-                .id(1)
-                .name("first stage")
-                .build();
+        entity = TestObjectsInitializer.initRepairStageEntity();
+        item = TestObjectsInitializer.initRepairStage();
     }
 
     @Test

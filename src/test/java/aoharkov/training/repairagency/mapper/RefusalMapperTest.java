@@ -1,5 +1,6 @@
 package aoharkov.training.repairagency.mapper;
 
+import aoharkov.training.repairagency.TestObjectsInitializer;
 import aoharkov.training.repairagency.domain.Refusal;
 import aoharkov.training.repairagency.domain.Request;
 import aoharkov.training.repairagency.domain.User;
@@ -16,18 +17,8 @@ public class RefusalMapperTest {
 
     @Before
     public void setUp() {
-        entity = RefusalEntity.builder()
-                .id(1)
-                .explanation("because")
-                .managerId(2)
-                .requestId(3)
-                .build();
-        item = Refusal.builder()
-                .id(1)
-                .explanation("because")
-                .manager(User.builder().id(2).build())
-                .request(Request.builder().id(3).build())
-                .build();
+        entity = TestObjectsInitializer.initRefusalEntity();
+        item = TestObjectsInitializer.initRefusal();
     }
 
     @Test

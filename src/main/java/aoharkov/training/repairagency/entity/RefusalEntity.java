@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 @Entity
 @Data
-@Builder
 @AllArgsConstructor
 @Table(name = "refusals")
 public class RefusalEntity {

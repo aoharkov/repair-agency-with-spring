@@ -10,12 +10,11 @@ public class FeedbackMapper implements Mapper<FeedbackEntity, Feedback> {
 
     @Override
     public FeedbackEntity mapDomainToEntity(Feedback item) {
-        return FeedbackEntity.builder()
-                .id(item.getId())
-                .requestId(item.getRequest().getId())
-                .score(item.getScore())
-                .text(item.getText())
-                .build();
+        return new FeedbackEntity(
+                item.getId(),
+                item.getRequest().getId(),
+                item.getText(),
+                item.getScore());
     }
 
     @Override
