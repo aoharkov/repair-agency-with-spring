@@ -1,4 +1,4 @@
-package aoharkov.training.repairagency.mapper;
+package aoharkov.training.repairagency.service.mapper;
 
 import aoharkov.training.repairagency.domain.Order;
 import aoharkov.training.repairagency.domain.RepairStage;

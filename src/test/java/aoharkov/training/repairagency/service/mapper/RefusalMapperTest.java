@@ -1,9 +1,7 @@
-package aoharkov.training.repairagency.mapper;
+package aoharkov.training.repairagency.service.mapper;
 
 import aoharkov.training.repairagency.TestObjectsInitializer;
 import aoharkov.training.repairagency.domain.Refusal;
-import aoharkov.training.repairagency.domain.Request;
-import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.RefusalEntity;
 import org.junit.Before;
 import org.junit.Test;

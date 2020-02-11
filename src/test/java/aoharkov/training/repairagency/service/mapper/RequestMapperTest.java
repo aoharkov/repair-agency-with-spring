@@ -1,23 +1,22 @@
-package aoharkov.training.repairagency.mapper;
+package aoharkov.training.repairagency.service.mapper;
 
 import aoharkov.training.repairagency.TestObjectsInitializer;
-import aoharkov.training.repairagency.domain.Feedback;
 import aoharkov.training.repairagency.domain.Request;
-import aoharkov.training.repairagency.entity.FeedbackEntity;
+import aoharkov.training.repairagency.entity.RequestEntity;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class FeedbackMapperTest {
-    private static final Mapper<FeedbackEntity, Feedback> MAPPER = new FeedbackMapper();
-    private FeedbackEntity entity;
-    private Feedback item;
+public class RequestMapperTest {
+    private static final Mapper<RequestEntity, Request> MAPPER = new RequestMapper();
+    private RequestEntity entity;
+    private Request item;
 
     @Before
     public void setUp() {
-        entity = TestObjectsInitializer.initFeedbackEntity();
-        item = TestObjectsInitializer.initFeedback();
+        entity = TestObjectsInitializer.initRequestEntity();
+        item = TestObjectsInitializer.initRequest();
     }
 
     @Test

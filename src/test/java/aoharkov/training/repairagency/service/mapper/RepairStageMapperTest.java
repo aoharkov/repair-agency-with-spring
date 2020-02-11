@@ -1,4 +1,4 @@
-package aoharkov.training.repairagency.mapper;
+package aoharkov.training.repairagency.service.mapper;
 
 import aoharkov.training.repairagency.TestObjectsInitializer;
 import aoharkov.training.repairagency.domain.RepairStage;

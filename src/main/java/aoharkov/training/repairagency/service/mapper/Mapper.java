@@ -1,4 +1,4 @@
-package aoharkov.training.repairagency.mapper;
+package aoharkov.training.repairagency.service.mapper;
 
 public interface Mapper<E, D> {
 

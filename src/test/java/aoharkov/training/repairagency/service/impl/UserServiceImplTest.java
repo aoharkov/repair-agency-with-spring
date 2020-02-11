@@ -3,7 +3,7 @@ package aoharkov.training.repairagency.service.impl;
 import aoharkov.training.repairagency.TestObjectsInitializer;
 import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.UserEntity;
-import aoharkov.training.repairagency.mapper.UserMapper;
+import aoharkov.training.repairagency.service.mapper.UserMapper;
 import aoharkov.training.repairagency.repository.UserRepository;
 import aoharkov.training.repairagency.service.exception.EntityAlreadyExistException;
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;

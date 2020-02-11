@@ -1,4 +1,4 @@
-package aoharkov.training.repairagency.mapper;
+package aoharkov.training.repairagency.service.mapper;
 
 import aoharkov.training.repairagency.domain.Feedback;
 import aoharkov.training.repairagency.domain.Request;
