@@ -12,6 +12,7 @@ import aoharkov.training.repairagency.service.validator.Validator;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,14 +21,14 @@ public class UserServiceImpl implements UserService {
     private final Validator<User> userValidator;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-    private final BCryptPasswordEncoder encoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User login(String email, String password) {
         userValidator.validateEmail(email);
         UserEntity userEntity = userRepository.findByEmail(email);
         if (userEntity != null) {
-            String encryptedPassword = encoder.encode(password);
+            String encryptedPassword = passwordEncoder.encode(password);
             if (encryptedPassword.equals(userEntity.getPassword())) {
                 return userMapper.mapEntityToDomain(userEntity);
             } else {
