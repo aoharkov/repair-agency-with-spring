@@ -5,15 +5,11 @@ import aoharkov.training.repairagency.domain.Order;
 import aoharkov.training.repairagency.domain.Refusal;
 import aoharkov.training.repairagency.domain.RepairStage;
 import aoharkov.training.repairagency.domain.Request;
+import aoharkov.training.repairagency.entity.FeedbackEntity;
 import aoharkov.training.repairagency.entity.OrderEntity;
 import aoharkov.training.repairagency.entity.RefusalEntity;
 import aoharkov.training.repairagency.entity.RepairStageEntity;
 import aoharkov.training.repairagency.entity.RequestEntity;
-import aoharkov.training.repairagency.service.mapper.FeedbackMapper;
-import aoharkov.training.repairagency.service.mapper.OrderMapper;
-import aoharkov.training.repairagency.service.mapper.RefusalMapper;
-import aoharkov.training.repairagency.service.mapper.RepairStageMapper;
-import aoharkov.training.repairagency.service.mapper.RequestMapper;
 import aoharkov.training.repairagency.repository.FeedbackRepository;
 import aoharkov.training.repairagency.repository.OrderRepository;
 import aoharkov.training.repairagency.repository.RefusalRepository;
@@ -21,6 +17,7 @@ import aoharkov.training.repairagency.repository.RepairStageRepository;
 import aoharkov.training.repairagency.repository.RequestRepository;
 import aoharkov.training.repairagency.service.ClientService;
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
+import aoharkov.training.repairagency.service.mapper.Mapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,11 +34,11 @@ public class ClientServiceImpl implements ClientService {
     private final OrderRepository orderRepository;
     private final RepairStageRepository repairStageRepository;
     private final FeedbackRepository feedbackRepository;
-    private final RequestMapper requestMapper;
-    private final RefusalMapper refusalMapper;
-    private final OrderMapper orderMapper;
-    private final RepairStageMapper repairStageMapper;
-    private final FeedbackMapper feedbackMapper;
+    private final Mapper<RequestEntity, Request> requestMapper;
+    private final Mapper<RefusalEntity, Refusal> refusalMapper;
+    private final Mapper<OrderEntity, Order> orderMapper;
+    private final Mapper<RepairStageEntity, RepairStage> repairStageMapper;
+    private final Mapper<FeedbackEntity, Feedback> feedbackMapper;
 
 
     @Override
@@ -53,8 +50,8 @@ public class ClientServiceImpl implements ClientService {
     public Page<Request> findOwnRequests(Integer clientId, int page, int itemsPerPage) {
         Page<RequestEntity> requestEntityPage =
                 requestRepository.findAllByClientId(clientId, PageRequest.of(page, itemsPerPage));
-        return requestEntityPage.map(requestMapper::mapEntityToDomain);
 
+        return requestEntityPage.map(requestMapper::mapEntityToDomain);
     }
 
     @Override

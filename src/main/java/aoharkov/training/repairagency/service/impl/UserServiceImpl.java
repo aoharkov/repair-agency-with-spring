@@ -2,12 +2,12 @@ package aoharkov.training.repairagency.service.impl;
 
 import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.UserEntity;
-import aoharkov.training.repairagency.service.mapper.UserMapper;
 import aoharkov.training.repairagency.repository.UserRepository;
 import aoharkov.training.repairagency.service.UserService;
 import aoharkov.training.repairagency.service.exception.EntityAlreadyExistException;
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
 import aoharkov.training.repairagency.service.exception.IncorrectPasswordException;
+import aoharkov.training.repairagency.service.mapper.Mapper;
 import aoharkov.training.repairagency.service.validator.Validator;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     private final Validator<User> userValidator;
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
+    private final Mapper<UserEntity, User> userMapper;
     private final PasswordEncoder passwordEncoder;
 
     @Override

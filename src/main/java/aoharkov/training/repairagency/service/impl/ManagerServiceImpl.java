@@ -5,21 +5,21 @@ import aoharkov.training.repairagency.domain.Order;
 import aoharkov.training.repairagency.domain.Refusal;
 import aoharkov.training.repairagency.domain.Request;
 import aoharkov.training.repairagency.entity.FeedbackEntity;
+import aoharkov.training.repairagency.entity.OrderEntity;
+import aoharkov.training.repairagency.entity.RefusalEntity;
 import aoharkov.training.repairagency.entity.RequestEntity;
-import aoharkov.training.repairagency.service.mapper.FeedbackMapper;
-import aoharkov.training.repairagency.service.mapper.OrderMapper;
-import aoharkov.training.repairagency.service.mapper.RefusalMapper;
-import aoharkov.training.repairagency.service.mapper.RequestMapper;
 import aoharkov.training.repairagency.repository.FeedbackRepository;
 import aoharkov.training.repairagency.repository.OrderRepository;
 import aoharkov.training.repairagency.repository.RefusalRepository;
 import aoharkov.training.repairagency.repository.RequestRepository;
 import aoharkov.training.repairagency.service.ManagerService;
+import aoharkov.training.repairagency.service.mapper.Mapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -30,10 +30,10 @@ public class ManagerServiceImpl implements ManagerService {
     private final RefusalRepository refusalRepository;
     private final OrderRepository orderRepository;
     private final FeedbackRepository feedbackRepository;
-    private final RequestMapper requestMapper;
-    private final RefusalMapper refusalMapper;
-    private final OrderMapper orderMapper;
-    private final FeedbackMapper feedbackMapper;
+    private final Mapper<RequestEntity, Request> requestMapper;
+    private final Mapper<RefusalEntity, Refusal> refusalMapper;
+    private final Mapper<OrderEntity, Order> orderMapper;
+    private final Mapper<FeedbackEntity, Feedback> feedbackMapper;
 
     @Override
     public Page<Request> findAllRequests(int page, int itemsPerPage) {
@@ -41,9 +41,9 @@ public class ManagerServiceImpl implements ManagerService {
         return requestEntityPage.map(requestMapper::mapEntityToDomain);
     }
 
+    @Transactional
     @Override
     public boolean acceptRequest(Order order) {
-        //todo as transaction
         Optional<RequestEntity> requestEntity = requestRepository.findById(order.getRequest().getId());
         if (requestEntity.isPresent()) {
             Request request = requestMapper.mapEntityToDomain(requestEntity.get());
@@ -56,9 +56,9 @@ public class ManagerServiceImpl implements ManagerService {
         return false;
     }
 
+    @Transactional
     @Override
     public boolean declineRequest(Refusal refusal) {
-        //todo as transaction
         Optional<RequestEntity> requestEntity = requestRepository.findById(refusal.getRequest().getId());
         if (requestEntity.isPresent()) {
             Request request = requestMapper.mapEntityToDomain(requestEntity.get());

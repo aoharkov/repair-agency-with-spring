@@ -6,14 +6,12 @@ import aoharkov.training.repairagency.domain.Request;
 import aoharkov.training.repairagency.entity.OrderEntity;
 import aoharkov.training.repairagency.entity.RepairStageEntity;
 import aoharkov.training.repairagency.entity.RequestEntity;
-import aoharkov.training.repairagency.service.mapper.OrderMapper;
-import aoharkov.training.repairagency.service.mapper.RepairStageMapper;
-import aoharkov.training.repairagency.service.mapper.RequestMapper;
 import aoharkov.training.repairagency.repository.OrderRepository;
 import aoharkov.training.repairagency.repository.RepairStageRepository;
 import aoharkov.training.repairagency.repository.RequestRepository;
 import aoharkov.training.repairagency.service.MasterService;
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
+import aoharkov.training.repairagency.service.mapper.Mapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,9 +26,9 @@ public class MasterServiceImpl implements MasterService {
     private final OrderRepository orderRepository;
     private final RequestRepository requestRepository;
     private final RepairStageRepository repairStageRepository;
-    private final RequestMapper requestMapper;
-    private final OrderMapper orderMapper;
-    private final RepairStageMapper repairStageMapper;
+    private final Mapper<RequestEntity, Request> requestMapper;
+    private final Mapper<OrderEntity, Order> orderMapper;
+    private final Mapper<RepairStageEntity, RepairStage> repairStageMapper;
 
     @Override
     public Page<Order> findAllOrders(int page, int itemsPerPage) {
@@ -51,9 +49,10 @@ public class MasterServiceImpl implements MasterService {
     }
 
     @Override
-    public boolean updateRepairStage(Order order, RepairStage repairStage) {
-        Optional<OrderEntity> orderEntity = orderRepository.findById(order.getId());
+    public boolean updateRepairStage(Integer orderId, RepairStage repairStage) {
+        Optional<OrderEntity> orderEntity = orderRepository.findById(orderId);
         if (orderEntity.isPresent()) {
+            Order order = orderMapper.mapEntityToDomain(orderEntity.get());
             order.setRepairStage(repairStage);
             orderRepository.save(orderMapper.mapDomainToEntity(order));
             return true;
