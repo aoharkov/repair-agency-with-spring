@@ -8,6 +8,7 @@ import aoharkov.training.repairagency.service.UserService;
 import aoharkov.training.repairagency.service.exception.EntityAlreadyExistException;
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
 import aoharkov.training.repairagency.service.exception.IncorrectPasswordException;
+import aoharkov.training.repairagency.service.validator.Validator;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,12 +17,14 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserServiceImpl implements UserService {
+    private final Validator<User> userValidator;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final BCryptPasswordEncoder encoder;
 
     @Override
     public User login(String email, String password) {
+        userValidator.validateEmail(email);
         UserEntity userEntity = userRepository.findByEmail(email);
         if (userEntity != null) {
             String encryptedPassword = encoder.encode(password);
@@ -36,6 +39,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void register(User user) {
+        userValidator.validate(user);
         if (userRepository.findByEmail(user.getEmail()) != null) {
             throw new EntityAlreadyExistException();
         }

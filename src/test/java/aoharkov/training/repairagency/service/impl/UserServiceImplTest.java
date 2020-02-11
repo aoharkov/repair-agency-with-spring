@@ -8,8 +8,11 @@ import aoharkov.training.repairagency.service.exception.EntityAlreadyExistExcept
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidEmailException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidPasswordException;
+import aoharkov.training.repairagency.service.validator.UserValidatorImpl;
 import org.junit.After;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -18,6 +21,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
@@ -47,6 +51,11 @@ public class UserServiceImplTest {
             .email(EMAIL)
             .build();
 
+    @Rule
+    public ExpectedException thrown= ExpectedException.none();
+
+    @Mock
+    private UserValidatorImpl userValidator;
     @Mock
     private BCryptPasswordEncoder passwordEncoder;
     @Mock
@@ -64,6 +73,7 @@ public class UserServiceImplTest {
 
     @Test
     public void userShouldLoginSuccessfully() {
+        doNothing().when(userValidator).validateEmail(eq(EMAIL));
         when(userRepository.findByEmail(eq(EMAIL))).thenReturn(USER_ENTITY);
         when(passwordEncoder.encode(eq(PASSWORD))).thenReturn(ENCODED_PASSWORD);
         when(userMapper.mapEntityToDomain(eq(USER_ENTITY))).thenReturn(USER);
@@ -71,39 +81,49 @@ public class UserServiceImplTest {
         final User user = userService.login(EMAIL, PASSWORD);
         assertEquals(USER, user);
 
+        verify(userValidator).validateEmail(eq(EMAIL));
         verify(userRepository).findByEmail(eq(EMAIL));
         verify(passwordEncoder).encode(eq(PASSWORD));
         verify(userMapper).mapEntityToDomain(eq(USER_ENTITY));
     }
 
-    @Test(expected = InvalidEmailException.class)
+    @Test
     public void userShouldNotLoginAsEmailIsNotValid() {
+        doThrow(InvalidEmailException.class).when(userValidator).validateEmail(INVALID_EMAIL);
+        thrown.expect(InvalidEmailException.class);
 
         userService.login(INVALID_EMAIL, PASSWORD);
 
+        verify(userValidator).validateEmail(eq(INVALID_EMAIL));
         verifyZeroInteractions(userRepository);
         verifyZeroInteractions(passwordEncoder);
         verifyZeroInteractions(userMapper);
     }
 
-    @Test(expected = EntityNotFoundException.class)
+    @Test
     public void userShouldNotLoginAsEmailNotFoundInDB() {
+        doNothing().when(userValidator).validateEmail(eq(CORRECT_EMAIL_NOT_IN_DB));
         doThrow(EntityNotFoundException.class).when(userRepository).findByEmail(eq(CORRECT_EMAIL_NOT_IN_DB));
 
+        thrown.expect(EntityNotFoundException.class);
         userService.login(CORRECT_EMAIL_NOT_IN_DB, PASSWORD);
 
+        verify(userValidator).validateEmail(eq(CORRECT_EMAIL_NOT_IN_DB));
         verify(userRepository).findByEmail(eq(CORRECT_EMAIL_NOT_IN_DB));
         verifyZeroInteractions(passwordEncoder);
         verifyZeroInteractions(userMapper);
     }
 
-    @Test(expected = InvalidPasswordException.class)
+    @Test
     public void userShouldNotLoginAsPasswordIsIncorrect() {
+        doNothing().when(userValidator).validateEmail(eq(EMAIL));
         when(userRepository.findByEmail(eq(EMAIL))).thenReturn(USER_ENTITY);
         doThrow(InvalidPasswordException.class).when(passwordEncoder).encode(eq(INCORRECT_PASSWORD));
 
+        thrown.expect(InvalidPasswordException.class);
         userService.login(EMAIL, INCORRECT_PASSWORD);
 
+        verify(userValidator).validateEmail(eq(EMAIL));
         verify(userRepository).findByEmail(eq(EMAIL));
         verify(passwordEncoder).encode(INCORRECT_PASSWORD);
         verifyZeroInteractions(userMapper);
@@ -111,32 +131,41 @@ public class UserServiceImplTest {
 
     @Test
     public void userShouldRegisterSuccessfully() {
+        doNothing().when(userValidator).validate(any(User.class));
         when(userRepository.findByEmail(anyString())).thenReturn(null);
         when(userMapper.mapDomainToEntity(eq(USER))).thenReturn(USER_ENTITY);
-        doNothing().when(userRepository).save(USER_ENTITY);
+        when(userRepository.save(eq(USER_ENTITY))).thenReturn(USER_ENTITY);
 
         userService.register(USER);
 
+        verify(userValidator).validate(any(User.class));
         verify(userRepository).findByEmail(anyString());
         verify(userMapper).mapDomainToEntity(USER);
         verify(userRepository).save(USER_ENTITY);
     }
 
-    @Test(expected = InvalidEmailException.class)
+    @Test
     public void userShouldNotRegisterAsEmailIsInvalid() {
+        doThrow(InvalidEmailException.class).when(userValidator).validate(any(User.class));
+
+        thrown.expect(InvalidEmailException.class);
         userService.register(USER);
 
+        verify(userValidator).validate(any(User.class));
         verifyZeroInteractions(userRepository);
         verifyZeroInteractions(userMapper);
         verifyZeroInteractions(userRepository);
     }
 
-    @Test(expected = EntityAlreadyExistException.class)
+    @Test
     public void userShouldNotRegisterAsEmailIsAlreadyInDB() {
+        doNothing().when(userValidator).validate(any(User.class));
         doThrow(EntityAlreadyExistException.class).when(userRepository).findByEmail(EMAIL);
 
+        thrown.expect(EntityAlreadyExistException.class);
         userService.register(USER);
 
+        verify(userValidator).validate(any(User.class));
         verify(userRepository).findByEmail(anyString());
         verifyZeroInteractions(userMapper);
         verifyZeroInteractions(userRepository);

@@ -15,30 +15,27 @@ import aoharkov.training.repairagency.mapper.OrderMapper;
 import aoharkov.training.repairagency.mapper.RefusalMapper;
 import aoharkov.training.repairagency.mapper.RepairStageMapper;
 import aoharkov.training.repairagency.mapper.RequestMapper;
-import aoharkov.training.repairagency.mapper.UserMapper;
 import aoharkov.training.repairagency.repository.FeedbackRepository;
 import aoharkov.training.repairagency.repository.OrderRepository;
 import aoharkov.training.repairagency.repository.RefusalRepository;
 import aoharkov.training.repairagency.repository.RepairStageRepository;
 import aoharkov.training.repairagency.repository.RequestRepository;
-import aoharkov.training.repairagency.repository.UserRepository;
 import aoharkov.training.repairagency.repository.domain.Page;
 import org.junit.After;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -86,12 +83,9 @@ public class ClientServiceImplTest {
             .id(5)
             .build();
 
-    @Mock
-    private BCryptPasswordEncoder passwordEncoder;
-    @Mock
-    private UserRepository userRepository;
-    @Mock
-    private UserMapper userMapper;
+    @Rule
+    public ExpectedException thrown= ExpectedException.none();
+
     @Mock
     private RequestRepository requestRepository;
     @Mock
@@ -125,61 +119,11 @@ public class ClientServiceImplTest {
     @Test
     public void saveRequestShouldSaveSuccessfully() {
         when(requestMapper.mapDomainToEntity(eq(REQUEST))).thenReturn(REQUEST_ENTITY);
-        doNothing().when(requestRepository).save(REQUEST_ENTITY);
+        when(requestRepository.save(eq(REQUEST_ENTITY))).thenReturn(REQUEST_ENTITY);
 
         clientService.saveRequest(REQUEST);
 
         verify(requestMapper).mapDomainToEntity(eq(REQUEST));
         verify(requestRepository).save(eq(REQUEST_ENTITY));
-        //verifyZeroInteractions(requestDao);
-        verifyZeroInteractions(refusalRepository);
-        verifyZeroInteractions(orderRepository);
-        verifyZeroInteractions(repairStageRepository);
-        verifyZeroInteractions(feedbackRepository);
-        //verifyZeroInteractions(requestMapper);
-        verifyZeroInteractions(refusalMapper);
-        verifyZeroInteractions(orderMapper);
-        verifyZeroInteractions(repairStageMapper);
-        verifyZeroInteractions(feedbackMapper);
-    }
-
-    /*@Test
-    public void findOwnRequestsShouldFindSuccessfully() {
-        when(requestRepository.findAllByClientId(anyInt(), anyInt(), anyInt())).thenReturn(REQUEST_ENTITY_PAGE);
-        when(requestMapper.mapEntityToDomain(eq(REQUEST_ENTITY))).thenReturn(REQUEST);
-
-        clientService.findOwnRequests(1, 5, 1);
-
-        verify(requestRepository).findAllByClientId(anyInt(), anyInt(), anyInt());
-        verify(requestMapper, times(2)).mapEntityToDomain(eq(REQUEST_ENTITY));
-        verifyZeroInteractions(passwordEncoder);
-        verifyZeroInteractions(userRepository);
-        verifyZeroInteractions(userMapper);
-        //verifyZeroInteractions(requestDao);
-        verifyZeroInteractions(refusalRepository);
-        verifyZeroInteractions(orderRepository);
-        verifyZeroInteractions(repairStageRepository);
-        verifyZeroInteractions(feedbackRepository);
-        //verifyZeroInteractions(requestMapper);
-        verifyZeroInteractions(refusalMapper);
-        verifyZeroInteractions(orderMapper);
-        verifyZeroInteractions(repairStageMapper);
-        verifyZeroInteractions(feedbackMapper);
-    }*/
-
-    @Test
-    public void findOrder() {
-    }
-
-    @Test
-    public void findRefusal() {
-    }
-
-    @Test
-    public void saveFeedback() {
-    }
-
-    @Test
-    public void findRepairStage() {
     }
 }
