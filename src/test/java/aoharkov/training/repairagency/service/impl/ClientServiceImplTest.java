@@ -20,7 +20,6 @@ import aoharkov.training.repairagency.repository.OrderRepository;
 import aoharkov.training.repairagency.repository.RefusalRepository;
 import aoharkov.training.repairagency.repository.RepairStageRepository;
 import aoharkov.training.repairagency.repository.RequestRepository;
-import aoharkov.training.repairagency.repository.domain.Page;
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,9 +29,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
@@ -45,12 +41,6 @@ public class ClientServiceImplTest {
             .build();
     private static final Request REQUEST = Request.builder()
             .id(1)
-            .build();
-    private static final Page<RequestEntity> REQUEST_ENTITY_PAGE = Page.<RequestEntity>builder()
-            .withItems(Arrays.asList(REQUEST_ENTITY, REQUEST_ENTITY))
-            .build();
-    private static final Page<Request> REQUEST_PAGE = Page.<Request>builder()
-            .withItems(Collections.emptyList())
             .build();
     private static final OrderEntity ORDER_ENTITY = OrderEntity.builder()
             .id(2)
@@ -84,7 +74,7 @@ public class ClientServiceImplTest {
             .build();
 
     @Rule
-    public ExpectedException thrown= ExpectedException.none();
+    public ExpectedException thrown = ExpectedException.none();
 
     @Mock
     private RequestRepository requestRepository;

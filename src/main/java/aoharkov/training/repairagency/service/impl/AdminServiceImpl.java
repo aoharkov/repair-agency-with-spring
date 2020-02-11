@@ -8,6 +8,8 @@ import aoharkov.training.repairagency.repository.UserRepository;
 import aoharkov.training.repairagency.service.AdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,13 +20,12 @@ public class AdminServiceImpl implements AdminService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-/*    @Override
-    public List<User> findAllUsers(int page, int itemsPerPage) {
-        Page<UserEntity> userEntityPage = userRepository.findAll(page, itemsPerPage);
-        return userEntityPage.getItems().stream()
-                .map(userMapper::mapEntityToDomain)
-                .collect(Collectors.toList());
-    }*/
+    @Override
+    public Page<User> findAllUsers(int page, int itemsPerPage) {
+        Page<UserEntity> userEntityPage =
+                userRepository.findAll(PageRequest.of(page, itemsPerPage));
+        return userEntityPage.map(userMapper::mapEntityToDomain);
+    }
 
     @Override
     public void setRoleToUser(User user, Role role) {

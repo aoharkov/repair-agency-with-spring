@@ -3,14 +3,15 @@ package aoharkov.training.repairagency.service;
 import aoharkov.training.repairagency.domain.Order;
 import aoharkov.training.repairagency.domain.RepairStage;
 import aoharkov.training.repairagency.domain.Request;
+import org.springframework.data.domain.Page;
 
 public interface MasterService {
 
-    //List<Order> findAllOrders(int page, int itemsPerPage);
+    Page<Order> findAllOrders(int page, int itemsPerPage);
 
     Request getRequest(Integer orderId);
 
-    boolean updateRepairStage(Order order, RepairStage repairStage);
+    boolean updateRepairStage(Order order, RepairStage newRepairStage);
 
-    //List<RepairStage> findAllRepairStages(int page, int itemsPerPage);
+    Page<RepairStage> findAllRepairStages(int page, int itemsPerPage);
 }

@@ -4,7 +4,6 @@ import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.UserEntity;
 import aoharkov.training.repairagency.mapper.UserMapper;
 import aoharkov.training.repairagency.repository.UserRepository;
-import aoharkov.training.repairagency.service.UserService;
 import aoharkov.training.repairagency.service.exception.EntityAlreadyExistException;
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidEmailException;
@@ -19,7 +18,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.Assert.assertEquals;
@@ -54,7 +52,7 @@ public class UserServiceImplTest {
             .build();
 
     @Rule
-    public ExpectedException thrown= ExpectedException.none();
+    public ExpectedException thrown = ExpectedException.none();
 
     @Mock
     private Validator<User> userValidator;

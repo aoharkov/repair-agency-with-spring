@@ -8,6 +8,7 @@ import aoharkov.training.repairagency.domain.Request;
 import aoharkov.training.repairagency.entity.OrderEntity;
 import aoharkov.training.repairagency.entity.RefusalEntity;
 import aoharkov.training.repairagency.entity.RepairStageEntity;
+import aoharkov.training.repairagency.entity.RequestEntity;
 import aoharkov.training.repairagency.mapper.FeedbackMapper;
 import aoharkov.training.repairagency.mapper.OrderMapper;
 import aoharkov.training.repairagency.mapper.RefusalMapper;
@@ -22,6 +23,8 @@ import aoharkov.training.repairagency.service.ClientService;
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -46,13 +49,13 @@ public class ClientServiceImpl implements ClientService {
         requestRepository.save(requestMapper.mapDomainToEntity(request));
     }
 
-    /*@Override
-    public List<Request> findOwnRequests(int page, int itemsPerPage, Integer clientId) {
-        Page<RequestEntity> requestEntityPage = requestRepository.findAllByClientId(page, itemsPerPage, clientId);
-        return requestEntityPage.getItems().stream()
-                .map(requestMapper::mapEntityToDomain)
-                .collect(Collectors.toList());
-    }*/
+    @Override
+    public Page<Request> findOwnRequests(Integer clientId, int page, int itemsPerPage) {
+        Page<RequestEntity> requestEntityPage =
+                requestRepository.findAllByClientId(clientId, PageRequest.of(page, itemsPerPage));
+        return requestEntityPage.map(requestMapper::mapEntityToDomain);
+
+    }
 
     @Override
     public Order findOrder(Integer requestId) {

@@ -4,6 +4,7 @@ import aoharkov.training.repairagency.domain.Order;
 import aoharkov.training.repairagency.domain.RepairStage;
 import aoharkov.training.repairagency.domain.Request;
 import aoharkov.training.repairagency.entity.OrderEntity;
+import aoharkov.training.repairagency.entity.RepairStageEntity;
 import aoharkov.training.repairagency.entity.RequestEntity;
 import aoharkov.training.repairagency.mapper.OrderMapper;
 import aoharkov.training.repairagency.mapper.RepairStageMapper;
@@ -15,6 +16,8 @@ import aoharkov.training.repairagency.service.MasterService;
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -29,13 +32,11 @@ public class MasterServiceImpl implements MasterService {
     private final OrderMapper orderMapper;
     private final RepairStageMapper repairStageMapper;
 
-/*    @Override
-    public List<Order> findAllOrders(int page, int itemsPerPage) {
-        Page<OrderEntity> orderEntityPage = orderRepository.findAll(page, itemsPerPage);
-        return orderEntityPage.getItems().stream()
-                .map(orderMapper::mapEntityToDomain)
-                .collect(Collectors.toList());
-    }*/
+    @Override
+    public Page<Order> findAllOrders(int page, int itemsPerPage) {
+        Page<OrderEntity> orderEntityPage = orderRepository.findAll(PageRequest.of(page, itemsPerPage));
+        return orderEntityPage.map(orderMapper::mapEntityToDomain);
+    }
 
     @Override
     public Request getRequest(Integer orderId) {
@@ -60,11 +61,9 @@ public class MasterServiceImpl implements MasterService {
         return false;
     }
 
-    /*@Override
-    public List<RepairStage> findAllRepairStages(int page, int itemsPerPage) {
-        Page<RepairStageEntity> repairStageEntityPage = repairStageRepository.findAll(page, itemsPerPage);
-        return repairStageEntityPage.getItems().stream()
-                .map(repairStageMapper::mapEntityToDomain)
-                .collect(Collectors.toList());
-    }*/
+    @Override
+    public Page<RepairStage> findAllRepairStages(int page, int itemsPerPage) {
+        Page<RepairStageEntity> repairStageEntityPage = repairStageRepository.findAll(PageRequest.of(page, itemsPerPage));
+        return repairStageEntityPage.map(repairStageMapper::mapEntityToDomain);
+    }
 }

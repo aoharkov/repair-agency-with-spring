@@ -11,7 +11,6 @@ import aoharkov.training.repairagency.service.exception.IncorrectPasswordExcepti
 import aoharkov.training.repairagency.service.validator.Validator;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
