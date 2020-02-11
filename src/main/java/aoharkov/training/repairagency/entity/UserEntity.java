@@ -3,6 +3,7 @@ package aoharkov.training.repairagency.entity;
 import aoharkov.training.repairagency.domain.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,25 +15,26 @@ import javax.persistence.Table;
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "users")
 public class UserEntity {
     @Id
     @Column(name = "id", nullable = false)
-    private final Integer id;
+    private Integer id;
 
     @Column(name = "name", nullable = false)
-    private final String name;
+    private String name;
 
     @Column(name = "surname")
-    private final String surname;
+    private String surname;
 
     @Column(name = "email", nullable = false)
-    private final String email;
+    private String email;
 
     @Column(name = "password", nullable = false)
-    private final String password;
+    private String password;
 
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
-    private final Role role;
+    private Role role;
 }

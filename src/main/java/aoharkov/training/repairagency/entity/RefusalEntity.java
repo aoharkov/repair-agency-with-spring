@@ -2,6 +2,7 @@ package aoharkov.training.repairagency.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,18 +13,19 @@ import javax.persistence.Table;
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "refusals")
 public class RefusalEntity {
     @Id
     @Column(name = "id", nullable = false)
-    private final Integer id;
+    private Integer id;
 
     @JoinColumn(name = "request_id", referencedColumnName = "id", nullable = false)
-    private final Integer requestId;
+    private Integer requestId;
 
     @Column(name = "explanation", nullable = false)
-    private final String explanation;
+    private String explanation;
 
     @JoinColumn(name = "manager_id", referencedColumnName = "id", nullable = false)
-    private final Integer managerId;
+    private Integer managerId;
 }
