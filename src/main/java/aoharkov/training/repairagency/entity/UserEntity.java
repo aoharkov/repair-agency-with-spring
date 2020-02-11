@@ -2,7 +2,6 @@ package aoharkov.training.repairagency.entity;
 
 import aoharkov.training.repairagency.domain.Role;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Column;

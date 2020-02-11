@@ -1,10 +1,8 @@
 package aoharkov.training.repairagency.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,8 +19,8 @@ public class FeedbackEntity {
     @Column(name = "id", nullable = false)
     private final Integer id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "request_id", referencedColumnName = "id", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "request_id", nullable = false)
     private final Integer requestId;
 
     @Column(name = "text")
