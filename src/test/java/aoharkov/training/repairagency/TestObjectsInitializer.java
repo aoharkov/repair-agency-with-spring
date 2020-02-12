@@ -14,14 +14,23 @@ import aoharkov.training.repairagency.entity.RepairStageEntity;
 import aoharkov.training.repairagency.entity.RequestEntity;
 import aoharkov.training.repairagency.entity.UserEntity;
 
-public class TestObjectsInitializer {
-    public static UserEntity initUserEntity() {
-        return new UserEntity(1, "John", "Doe", "admin@gmail.com", "password", Role.CLIENT);
+public abstract class TestObjectsInitializer {
+    private static final int CLIENT_ID = 1;
+    private static final int MANAGER_ID = 2;
+    private static final int MASTER_ID = 3;
+    private static final int REQUEST_ID = 4;
+    private static final int ORDER_ID = 5;
+    private static final int REFUSAL_ID = 6;
+    private static final int FEEDBACK_ID = 7;
+    private static final int REPAIR_STAGE_ID = 8;
+
+    public static UserEntity initUserEntity(int id) {
+        return new UserEntity(id, "John", "Doe", "admin@gmail.com", "password", Role.CLIENT);
     }
 
-    public static User initUser() {
+    public static User initUser(int id) {
         return User.builder()
-                .id(1)
+                .id(id)
                 .name("John")
                 .surname("Doe")
                 .email("admin@gmail.com")
@@ -31,67 +40,80 @@ public class TestObjectsInitializer {
     }
 
     public static RequestEntity initRequestEntity() {
-        return new RequestEntity(1, 2, "just do it", false, false);
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setId(REQUEST_ID);
+        requestEntity.setClient(initUserEntity(CLIENT_ID));
+        requestEntity.setDescription("just do it");
+        requestEntity.setViewed(false);
+        requestEntity.setAccepted(false);
+        return requestEntity;
     }
 
     public static Request initRequest() {
         return Request.builder()
-                .id(1)
+                .id(REQUEST_ID)
                 .description("just do it")
-                .client(User.builder().id(2).build())
+                .client(initUser(CLIENT_ID))
                 .viewed(false)
                 .accepted(false)
                 .build();
     }
 
     public static OrderEntity initOrderEntity() {
-        return new OrderEntity(1, 6, 2, 4000, 3, 5);
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setId(ORDER_ID);
+        orderEntity.setManager(initUserEntity(MANAGER_ID));
+        orderEntity.setPrice(4000);
+        orderEntity.setMaster(initUserEntity(MASTER_ID));
+        orderEntity.setRepairStage(initRepairStageEntity());
+        orderEntity.setRequest(initRequestEntity());
+        return orderEntity;
     }
 
     public static Order initOrder() {
         return Order.builder()
-                .id(1)
-                .manager(User.builder().id(2).build())
-                .master(User.builder().id(3).build())
+                .id(ORDER_ID)
+                .manager(initUser(MANAGER_ID))
+                .master(initUser(MASTER_ID))
                 .price(4000)
-                .repairStage(RepairStage.builder().id(5).build())
-                .request(Request.builder().id(6).build())
+                .repairStage(initRepairStage())
+                .request(initRequest())
                 .build();
     }
 
     public static RefusalEntity initRefusalEntity() {
-        return new RefusalEntity(1, 3, "because", 2);
+        return new RefusalEntity(REFUSAL_ID, initRequestEntity(), "because", initUserEntity(MANAGER_ID));
     }
 
     public static Refusal initRefusal() {
         return Refusal.builder()
-                .id(1)
+                .id(REFUSAL_ID)
                 .explanation("because")
-                .manager(User.builder().id(2).build())
-                .request(Request.builder().id(3).build())
+                .manager(initUser(MANAGER_ID))
+                .request(initRequest())
                 .build();
     }
 
     public static FeedbackEntity initFeedbackEntity() {
-        return new FeedbackEntity(1, 2, "UFO has published here", 3);
+        return new FeedbackEntity(FEEDBACK_ID, initRequestEntity(), "UFO has published here", 3);
     }
 
     public static Feedback initFeedback() {
         return Feedback.builder()
-                .id(1)
-                .request(Request.builder().id(2).build())
+                .id(FEEDBACK_ID)
+                .request(initRequest())
                 .score(3)
                 .text("UFO has published here")
                 .build();
     }
 
     public static RepairStageEntity initRepairStageEntity() {
-        return new RepairStageEntity(1, "first stage");
+        return new RepairStageEntity(REPAIR_STAGE_ID, "first stage");
     }
 
     public static RepairStage initRepairStage() {
         return RepairStage.builder()
-                .id(1)
+                .id(REPAIR_STAGE_ID)
                 .name("first stage")
                 .build();
     }

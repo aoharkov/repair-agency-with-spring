@@ -19,6 +19,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.Assert.assertEquals;
@@ -32,6 +33,7 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
+@SpringBootTest
 public class UserServiceImplTest {
     private static final String ENCODED_PASSWORD = "encoded_password";
     private static final String PASSWORD = "password";
@@ -41,8 +43,8 @@ public class UserServiceImplTest {
     private static final String INVALID_EMAIL = "admin#gmail.com";
     private static final String CORRECT_EMAIL_NOT_IN_DB = "admin@mail.ru";
 
-    private static final UserEntity USER_ENTITY = TestObjectsInitializer.initUserEntity();
-    private static final User USER = TestObjectsInitializer.initUser();
+    private static final UserEntity USER_ENTITY = TestObjectsInitializer.initUserEntity(1);
+    private static final User USER = TestObjectsInitializer.initUser(1);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
