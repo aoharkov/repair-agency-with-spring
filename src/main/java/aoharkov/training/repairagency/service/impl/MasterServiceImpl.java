@@ -40,7 +40,7 @@ public class MasterServiceImpl implements MasterService {
     public Request getRequest(Integer orderId) {
         Optional<OrderEntity> orderEntity = orderRepository.findById(orderId);
         if (orderEntity.isPresent()) {
-            Optional<RequestEntity> requestEntity = requestRepository.findById(orderEntity.get().getRequestId());
+            Optional<RequestEntity> requestEntity = requestRepository.findById(orderEntity.get().getRequest().getId());
             if (requestEntity.isPresent()) {
                 return requestMapper.mapEntityToDomain(requestEntity.get());
             }

@@ -3,27 +3,42 @@ package aoharkov.training.repairagency.service.mapper;
 import aoharkov.training.repairagency.domain.Feedback;
 import aoharkov.training.repairagency.domain.Request;
 import aoharkov.training.repairagency.entity.FeedbackEntity;
+import aoharkov.training.repairagency.entity.RequestEntity;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("feedbackMapper")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class FeedbackMapper implements Mapper<FeedbackEntity, Feedback> {
+    @Qualifier("requestMapper")
+    private Mapper<RequestEntity, Request> requestMapper;
 
     @Override
     public FeedbackEntity mapDomainToEntity(Feedback feedback) {
-        return new FeedbackEntity(
-                feedback.getId(),
-                feedback.getRequest().getId(),
-                feedback.getText(),
-                feedback.getScore());
+        if (feedback == null) {
+            return null;
+        }
+        FeedbackEntity feedbackEntity = new FeedbackEntity();
+        feedbackEntity.setId(feedback.getId());
+        feedbackEntity.setRequest(requestMapper.mapDomainToEntity(feedback.getRequest()));
+        feedbackEntity.setText(feedback.getText());
+        feedbackEntity.setScore(feedback.getScore());
+        return feedbackEntity;
     }
 
     @Override
-    public Feedback mapEntityToDomain(FeedbackEntity entity) {
+    public Feedback mapEntityToDomain(FeedbackEntity feedbackEntity) {
+        if (feedbackEntity == null) {
+            return null;
+        }
         return Feedback.builder()
-                .id(entity.getId())
-                .request(Request.builder().id(entity.getRequestId()).build())
-                .score(entity.getScore())
-                .text(entity.getText())
+                .id(feedbackEntity.getId())
+                .request(requestMapper.mapEntityToDomain(feedbackEntity.getRequest()))
+                .score(feedbackEntity.getScore())
+                .text(feedbackEntity.getText())
                 .build();
     }
 }
