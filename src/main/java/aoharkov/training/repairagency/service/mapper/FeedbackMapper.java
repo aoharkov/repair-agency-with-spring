@@ -5,7 +5,6 @@ import aoharkov.training.repairagency.domain.Request;
 import aoharkov.training.repairagency.entity.FeedbackEntity;
 import aoharkov.training.repairagency.entity.RequestEntity;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

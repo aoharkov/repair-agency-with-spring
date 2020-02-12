@@ -2,8 +2,6 @@ package aoharkov.training.repairagency.service.mapper;
 
 import aoharkov.training.repairagency.domain.RepairStage;
 import aoharkov.training.repairagency.entity.RepairStageEntity;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component("repairStageMapper")

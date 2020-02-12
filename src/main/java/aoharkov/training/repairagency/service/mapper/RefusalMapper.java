@@ -7,7 +7,6 @@ import aoharkov.training.repairagency.entity.RefusalEntity;
 import aoharkov.training.repairagency.entity.RequestEntity;
 import aoharkov.training.repairagency.entity.UserEntity;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

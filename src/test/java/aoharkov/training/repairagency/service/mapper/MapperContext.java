@@ -12,13 +12,6 @@ import aoharkov.training.repairagency.entity.RefusalEntity;
 import aoharkov.training.repairagency.entity.RepairStageEntity;
 import aoharkov.training.repairagency.entity.RequestEntity;
 import aoharkov.training.repairagency.entity.UserEntity;
-import aoharkov.training.repairagency.service.mapper.FeedbackMapper;
-import aoharkov.training.repairagency.service.mapper.Mapper;
-import aoharkov.training.repairagency.service.mapper.OrderMapper;
-import aoharkov.training.repairagency.service.mapper.RefusalMapper;
-import aoharkov.training.repairagency.service.mapper.RepairStageMapper;
-import aoharkov.training.repairagency.service.mapper.RequestMapper;
-import aoharkov.training.repairagency.service.mapper.UserMapper;
 
 abstract class MapperContext {
     private static final Mapper<UserEntity, User> USER_MAPPER = new UserMapper();

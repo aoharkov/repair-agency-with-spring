@@ -1,7 +1,5 @@
 package aoharkov.training.repairagency.entity;
 
-import aoharkov.training.repairagency.domain.Request;
-import aoharkov.training.repairagency.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
