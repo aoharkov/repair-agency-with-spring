@@ -9,23 +9,23 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class RefusalMapperTest {
-    private static final Mapper<RefusalEntity, Refusal> MAPPER = new RefusalMapper();
-    private RefusalEntity entity;
-    private Refusal item;
+    private static Mapper<RefusalEntity, Refusal> refusalMapper = MapperContext.getRefusalMapper();
+    private RefusalEntity refusalEntity;
+    private Refusal refusal;
 
     @Before
     public void setUp() {
-        entity = TestObjectsInitializer.initRefusalEntity();
-        item = TestObjectsInitializer.initRefusal();
+        refusalEntity = TestObjectsInitializer.initRefusalEntity();
+        refusal = TestObjectsInitializer.initRefusal();
     }
 
     @Test
     public void mapDomainToEntityShouldMapCorrectly() {
-        assertEquals(entity, MAPPER.mapDomainToEntity(item));
+        assertEquals(refusalEntity, refusalMapper.mapDomainToEntity(refusal));
     }
 
     @Test
     public void mapEntityToDomainShouldMapCorrectly() {
-        assertEquals(item, MAPPER.mapEntityToDomain(entity));
+        assertEquals(refusal, refusalMapper.mapEntityToDomain(refusalEntity));
     }
 }

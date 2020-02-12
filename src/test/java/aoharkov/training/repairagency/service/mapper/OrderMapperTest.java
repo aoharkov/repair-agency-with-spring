@@ -9,23 +9,23 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class OrderMapperTest {
-    private static final Mapper<OrderEntity, Order> MAPPER = new OrderMapper();
-    private OrderEntity entity;
-    private Order item;
+    private static Mapper<OrderEntity, Order> orderMapper = MapperContext.getOrderMapper();
+    private OrderEntity orderEntity;
+    private Order order;
 
     @Before
     public void setUp() {
-        entity = TestObjectsInitializer.initOrderEntity();
-        item = TestObjectsInitializer.initOrder();
+        orderEntity = TestObjectsInitializer.initOrderEntity();
+        order = TestObjectsInitializer.initOrder();
     }
 
     @Test
     public void mapDomainToEntityShouldMapCorrectly() {
-        assertEquals(entity, MAPPER.mapDomainToEntity(item));
+        assertEquals(orderEntity, orderMapper.mapDomainToEntity(order));
     }
 
     @Test
     public void mapEntityToDomainShouldMapCorrectly() {
-        assertEquals(item, MAPPER.mapEntityToDomain(entity));
+        assertEquals(order, orderMapper.mapEntityToDomain(orderEntity));
     }
 }

@@ -9,23 +9,23 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class RequestMapperTest {
-    private static final Mapper<RequestEntity, Request> MAPPER = new RequestMapper();
-    private RequestEntity entity;
-    private Request item;
+    private static Mapper<RequestEntity, Request> requestMapper = MapperContext.getRequestMapper();
+    private RequestEntity requestEntity;
+    private Request request;
 
     @Before
     public void setUp() {
-        entity = TestObjectsInitializer.initRequestEntity();
-        item = TestObjectsInitializer.initRequest();
+        requestEntity = TestObjectsInitializer.initRequestEntity();
+        request = TestObjectsInitializer.initRequest();
     }
 
     @Test
     public void mapDomainToEntityShouldMapCorrectly() {
-        assertEquals(entity, MAPPER.mapDomainToEntity(item));
+        assertEquals(requestEntity, requestMapper.mapDomainToEntity(request));
     }
 
     @Test
     public void mapEntityToDomainShouldMapCorrectly() {
-        assertEquals(item, MAPPER.mapEntityToDomain(entity));
+        assertEquals(request, requestMapper.mapEntityToDomain(requestEntity));
     }
 }

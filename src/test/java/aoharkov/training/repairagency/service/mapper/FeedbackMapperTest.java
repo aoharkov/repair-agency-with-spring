@@ -9,23 +9,23 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class FeedbackMapperTest {
-    private static final Mapper<FeedbackEntity, Feedback> MAPPER = new FeedbackMapper();
-    private FeedbackEntity entity;
-    private Feedback item;
+    private static Mapper<FeedbackEntity, Feedback> feedbackMapper = MapperContext.getFeedbackMapper();
+    private FeedbackEntity feedbackEntity;
+    private Feedback feedback;
 
     @Before
     public void setUp() {
-        entity = TestObjectsInitializer.initFeedbackEntity();
-        item = TestObjectsInitializer.initFeedback();
+        feedbackEntity = TestObjectsInitializer.initFeedbackEntity();
+        feedback = TestObjectsInitializer.initFeedback();
     }
 
     @Test
     public void mapDomainToEntityShouldMapCorrectly() {
-        assertEquals(entity, MAPPER.mapDomainToEntity(item));
+        assertEquals(feedbackEntity, feedbackMapper.mapDomainToEntity(feedback));
     }
 
     @Test
     public void mapEntityToDomainShouldMapCorrectly() {
-        assertEquals(item, MAPPER.mapEntityToDomain(entity));
+        assertEquals(feedback, feedbackMapper.mapEntityToDomain(feedbackEntity));
     }
 }

@@ -9,23 +9,23 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class RepairStageMapperTest {
-    private static final Mapper<RepairStageEntity, RepairStage> MAPPER = new RepairStageMapper();
-    private RepairStageEntity entity;
-    private RepairStage item;
+    private static Mapper<RepairStageEntity, RepairStage> repairStageMapper = MapperContext.getRepairStageMapper();
+    private RepairStageEntity repairStageEntity;
+    private RepairStage repairStage;
 
     @Before
     public void setUp() {
-        entity = TestObjectsInitializer.initRepairStageEntity();
-        item = TestObjectsInitializer.initRepairStage();
+        repairStageEntity = TestObjectsInitializer.initRepairStageEntity();
+        repairStage = TestObjectsInitializer.initRepairStage();
     }
 
     @Test
     public void mapDomainToEntityShouldMapCorrectly() {
-        assertEquals(entity, MAPPER.mapDomainToEntity(item));
+        assertEquals(repairStageEntity, repairStageMapper.mapDomainToEntity(repairStage));
     }
 
     @Test
     public void mapEntityToDomainShouldMapCorrectly() {
-        assertEquals(item, MAPPER.mapEntityToDomain(entity));
+        assertEquals(repairStage, repairStageMapper.mapEntityToDomain(repairStageEntity));
     }
 }
