@@ -1,5 +1,6 @@
 package aoharkov.training.repairagency.config;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,12 +14,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-    @Autowired
     private UserDetailsService userDetailsService;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -29,22 +27,25 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
         http.
                 authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/registration").permitAll()
-                .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+                .antMatchers("/", "/login", "/registration", "/error/**").permitAll()
+                //.antMatchers("/admin/**").hasRole(Role.ADMIN.name())
+                //.antMatchers("/manager/**").hasRole(Role.MANAGER.name())
+                //.antMatchers("/master/**").hasRole(Role.MASTER.name())
+                //.antMatchers("/client/**").hasRole(Role.CLIENT.name())
+                .antMatchers("/**").permitAll()
+                .anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
-                .defaultSuccessUrl("/service/client/home")
-                .usernameParameter("user_name")
+                .defaultSuccessUrl("/admin/home")
+                .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login").and().exceptionHandling()
-                .accessDeniedPage("/access-denied");
+                .accessDeniedPage("/error/403");
     }
 
     @Override

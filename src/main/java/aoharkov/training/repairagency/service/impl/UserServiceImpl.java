@@ -11,6 +11,8 @@ import aoharkov.training.repairagency.service.mapper.Mapper;
 import aoharkov.training.repairagency.service.validator.Validator;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -45,4 +47,12 @@ public class UserServiceImpl implements UserService {
         }
         userRepository.save(userMapper.mapDomainToEntity(user));
     }
+
+    @Override
+    public Page<User> findAllUsers(int page, int itemsPerPage) {
+        Page<UserEntity> userEntityPage = userRepository.findAll(PageRequest.of(page, itemsPerPage));
+        return userEntityPage.map(userMapper::mapEntityToDomain);
+    }
+
+
 }

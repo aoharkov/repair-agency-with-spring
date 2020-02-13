@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <title>Login</title>
+    <title>500</title>
 </head>
 <body>
 <table>
@@ -13,46 +13,10 @@
                  width="60">
         </td>
         <td>
-            <h2 th:text="#{title}">Repair Agency</h2>
-        </td>
-        <td>
-            <h3><a href="login.html" th:href="@{/login}">Login</a></h3>
-        </td>
-        <td>
-            <h3><a href="register.html" th:href="@{/register}">Register</a></h3>
-        </td>
-        <td>
-            <h3><a href="error500.html" th:href="@{/admin/users/all}">Test</a></h3>
-        </td>
-        <td>
-            <select id="locales">
-                <option th:text="#{lang.change}"></option>
-                <option th:text="#{lang.en}" value="en"></option>
-                <option th:text="#{lang.ru}" value="ru"></option>
-                <option th:text="#{lang.uk}" value="uk"></option>
-            </select>
+            <h2>Repair Agency</h2>
         </td>
     </tr>
 </table>
-<h1>Login page</h1>
-<form method="post" th:action="@{/login}">
-    <label for="email">Email</label>:
-    <input autofocus="autofocus" id="email" name="email" type="text"/> <br/>
-    <label for="password">Password</label>:
-    <input id="password" name="password" type="password"/> <br/>
-    <input type="submit" value="Log in"/>
-</form>
+<h1>Internal server error</h1>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-</script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#locales").change(function () {
-            var selectedOption = $('#locales').val();
-            if (selectedOption != '') {
-                window.location.replace('?lang=' + selectedOption);
-            }
-        });
-    });
-</script>
 </html>
