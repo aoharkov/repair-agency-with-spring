@@ -37,7 +37,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-@SpringBootTest
 public class ClientServiceImplTest {
     private static final RequestEntity REQUEST_ENTITY = TestObjectsInitializer.initRequestEntity();
     private static final Request REQUEST = TestObjectsInitializer.initRequest();

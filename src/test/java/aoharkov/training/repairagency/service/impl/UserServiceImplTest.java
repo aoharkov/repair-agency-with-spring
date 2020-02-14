@@ -33,7 +33,6 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-@SpringBootTest
 public class UserServiceImplTest {
     private static final String ENCODED_PASSWORD = "encoded_password";
     private static final String PASSWORD = "password";
