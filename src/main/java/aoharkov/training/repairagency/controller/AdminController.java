@@ -18,17 +18,16 @@ public class AdminController {
     private UserService userService;
 
     @GetMapping("/admin/users/all")
-    public String usersAll(Model model, @RequestParam("page") String page,
-                           @RequestParam("rowCount") String rowCount) {
+    public String usersAll(Model model, @RequestParam("rows") String rows,
+                           @RequestParam("page") String page) {
+        int itemsPerPage = Integer.parseInt(rows);
         int pageNum = Integer.parseInt(page);
-        int itemsPerPage = Integer.parseInt(rowCount);
-
-   /* public String usersAll(Model model) {
-        int pageNum = 1;
-        int itemsPerPage = 22;*/
         Page<User> pageOfUsers = userService.findAllUsers(pageNum - 1, itemsPerPage);
         List<User> users = pageOfUsers.getContent();
         model.addAttribute("users", users);
+        model.addAttribute("maxPage", pageOfUsers.getTotalPages());
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("itemsPerPage", itemsPerPage);
         return "users";
     }
 

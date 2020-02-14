@@ -16,12 +16,6 @@
             <h2 th:text="#{title}">Repair Agency</h2>
         </td>
         <td>
-            <h3><a href="login.html" th:href="@{/login}">Login</a></h3>
-        </td>
-        <td>
-            <h3><a href="register.html" th:href="@{/register}">Register</a></h3>
-        </td>
-        <td>
             <select id="locales">
                 <option th:text="#{lang.change}"></option>
                 <option th:text="#{lang.en}" value="en"></option>
@@ -47,8 +41,30 @@
         <td th:text="*{user.getRole().name()}"></td>
     </tr>
 </table>
-
-
+<table>
+    <tr>
+        <h2>
+            <td th:if="${pageNum} > 1">
+                <a th:href="@{/admin/users/all(rows = ${itemsPerPage}, page = 1)}" th:text="1"></a>
+            </td>
+            <td th:if="${pageNum} > 2">
+                <a th:href="@{/admin/users/all(rows = ${itemsPerPage}, page = ${pageNum} - 1)}" th:text="..."></a>
+            </td>
+            <td>
+                <h1>
+                    <a th:href="@{/admin/users/all(rows = ${itemsPerPage}, page = ${pageNum})}"
+                       th:text="${pageNum}"></a>
+                </h1>
+            </td>
+            <td th:if="${pageNum} + 1 < ${maxPage}">
+                <a th:href="@{/admin/users/all(rows = ${itemsPerPage}, page = ${pageNum} + 1)}" th:text="..."></a>
+            </td>
+            <td th:if="${pageNum} < ${maxPage}">
+                <a th:href="@{/admin/users/all(rows = ${itemsPerPage}, page = ${maxPage})}" th:text="${maxPage}"></a>
+            </td>
+        </h2>
+    </tr>
+</table>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
 </script>
