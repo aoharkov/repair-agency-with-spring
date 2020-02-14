@@ -14,6 +14,6 @@ public class ExceptionControllerHandler {
     public String exception(HttpServletRequest req, Throwable e) {
         StringBuffer requestUrl = req.getRequestURL();
         log.error("Request: {} raised {}", requestUrl, e);
-        return "error500.html";
+        return "error500";
     }
 }

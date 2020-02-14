@@ -20,19 +20,19 @@ public class UserController {
 
     @GetMapping(value = {"/", "/login"})
     public String loginGet() {
-        return "login.html";
+        return "login";
     }
 
     @GetMapping("/register")
     public String registerGet(Model model) {
         model.addAttribute("user", new User());
-        return "register.html";
+        return "register";
     }
 
     @PostMapping("/register")
     public String registerPost(Model model, @Valid User user, BindingResult bindingResult) {
         userService.register(user);
-        return "login.html";
+        return "login";
     }
 
     @RequestMapping("/access-denied")
